@@ -1,11 +1,11 @@
-"""Settings examples for Pydantic learning lab."""
+"""Pydantic 学习实验的配置示例，展示如何读取环境变量。"""
 from __future__ import annotations
 
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
 class AppSettings(BaseSettings):
-    """Application configuration loaded from environment variables."""
+    """从环境变量加载的应用配置。"""
 
     db_url: str
     debug: bool = False
@@ -15,7 +15,7 @@ class AppSettings(BaseSettings):
 
 
 def get_settings() -> AppSettings:
-    """Helper used by CLI and FastAPI app."""
+    """CLI 与 FastAPI 共享的配置加载辅助函数。"""
 
     return AppSettings()
 
