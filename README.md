@@ -22,6 +22,8 @@ pytest
 jupyter notebook
 ```
 
+> 国内或受限网络环境可为 `pip` 指定镜像源（如清华）：`pip install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple`
+
 FastAPI 示例运行：
 
 ```bash

@@ -11,16 +11,33 @@ class Address(BaseModel):
     """地址信息，演示嵌套模型的组合能力。"""
 
     city: str
-    country: str = Field(default="China", description="Country name, defaults to China")
-    postal_code: Optional[str] = Field(default=None, min_length=4, max_length=12)
+    country: str = Field(
+        default="China",
+        description="国家名称，默认 China，便于观察默认值行为",
+    )
+    postal_code: Optional[str] = Field(
+        default=None,
+        min_length=4,
+        max_length=12,
+        description="可选的邮政编码，限制长度展示数值/字符串校验",
+    )
 
 
 class Profile(BaseModel):
     """用户的可选档案信息。"""
 
-    bio: Optional[str] = None
-    website: Optional[HttpUrl] = None
-    interests: List[str] = Field(default_factory=list)
+    bio: Optional[str] = Field(
+        default=None,
+        description="个人简介，可为空，演示可选字段与默认值",
+    )
+    website: Optional[HttpUrl] = Field(
+        default=None,
+        description="个人站点 URL，使用 HttpUrl 类型自动校验",
+    )
+    interests: List[str] = Field(
+        default_factory=list,
+        description="兴趣列表，使用默认工厂避免可变默认值陷阱",
+    )
 
 
 class User(BaseModel):
@@ -28,13 +45,21 @@ class User(BaseModel):
 
     model_config = ConfigDict(validate_assignment=True)
 
-    id: int = Field(ge=1, description="Numeric identifier that must be positive")
-    name: str = Field(min_length=1)
-    email: EmailStr
-    created_at: datetime = Field(default_factory=datetime.utcnow)
-    tags: List[str] = Field(default_factory=list)
-    address: Optional[Address] = None
-    profile: Optional[Profile] = None
+    id: int = Field(ge=1, description="自增 ID，要求为正整数")
+    name: str = Field(min_length=1, description="姓名不能为空，自动去除首尾空格")
+    email: EmailStr = Field(description="邮箱地址，使用 EmailStr 自动校验格式")
+    created_at: datetime = Field(
+        default_factory=datetime.utcnow, description="创建时间，默认为当前 UTC 时间"
+    )
+    tags: List[str] = Field(
+        default_factory=list, description="标签列表，自动去重保持顺序"
+    )
+    address: Optional[Address] = Field(
+        default=None, description="可选的地址信息，演示嵌套模型"
+    )
+    profile: Optional[Profile] = Field(
+        default=None, description="可选档案，包含简介、个人站点与兴趣"
+    )
 
     @field_validator("name")
     @classmethod
