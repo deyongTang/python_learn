@@ -5,6 +5,8 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
+import pytest
+
 from pydantic_lab.cli import format_user, read_json_source, validate_user
 from pydantic_lab.models import TagList, User
 from pydantic_lab.settings import AppSettings
@@ -47,3 +49,16 @@ def test_read_json_source_stdin(monkeypatch, capsys):
     text = read_json_source(path=None, inline_json=None)
     assert "Cara" in text
     assert validate_user(text).id == 3
+
+
+def test_read_json_source_conflict_args(tmp_path: Path):
+    fake = tmp_path / "payload.json"
+    fake.write_text("{}", encoding="utf-8")
+    with pytest.raises(ValueError):
+        read_json_source(path=fake, inline_json="{}")
+
+
+def test_read_json_source_missing_file(tmp_path: Path):
+    missing = tmp_path / "missing.json"
+    with pytest.raises(FileNotFoundError):
+        read_json_source(path=missing, inline_json=None)

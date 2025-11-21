@@ -12,11 +12,19 @@ from .settings import get_settings
 
 
 def read_json_source(path: Optional[Path], inline_json: Optional[str]) -> str:
-    """读取 JSON 文本，可来自文件、内联字符串或标准输入。"""
+    """读取 JSON 文本，可来自文件、内联字符串或标准输入。
 
+    - 如果同时传入 `-f` 与 `-j`，视为用户误操作，直接提示冲突。
+    - 当给定文件路径时，提前检查文件是否存在，给出中文错误信息。
+    """
+
+    if path and inline_json:
+        raise ValueError("请仅选择文件(-f)或内联 JSON(-j) 之一，避免参数冲突")
     if inline_json:
         return inline_json
     if path:
+        if not path.exists():
+            raise FileNotFoundError(f"未找到指定的 JSON 文件：{path}")
         return path.read_text(encoding="utf-8")
     return sys.stdin.read()
 

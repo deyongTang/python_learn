@@ -6,6 +6,7 @@
 - `pydantic_lab/`：使用 Pydantic 进行数据验证的示例（CLI、FastAPI、环境配置）。
 - `docs/学习指南.md`：快速了解如何使用 Notebook 与 Pydantic 示例的中文技术文档。
 - `requirements.txt`：安装依赖以运行示例与测试（包含 Jupyter）。
+- `python -m pydantic_lab.cli`：命令行校验 JSON 的示例，`-f` 与 `-j` 参数二选一；路径不存在会给出中文提示。
 
 ## 快速开始
 
