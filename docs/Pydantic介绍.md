@@ -33,6 +33,53 @@ as_dict = user.model_dump()       # 转换为字典
 as_json = user.model_dump_json()  # 转换为 JSON 字符串
 ```
 
+## BaseModel 是什么、如何使用
+`BaseModel` 是 Pydantic 的核心基类，用类型注解声明数据模型，并在实例化时自动完成**类型转换**与**校验**。它适合用来描述接口入参、配置、业务领域对象。
+
+特性速览
+- 类型驱动：根据注解尽力转换输入（如 `"1"` 转为 `int`），失败抛出 `ValidationError`。
+- 默认值与必填：未提供默认值的字段必填；`Field` 可指定约束、别名、描述。
+- 序列化：`model_dump()`/`model_dump_json()` 可控制包含/排除、按别名导出。
+- 校验扩展：`@field_validator` 做字段校验，`@model_validator` 处理跨字段逻辑。
+- 额外字段策略：`extra="forbid" | "ignore" | "allow"` 决定未声明字段的处理方式。
+- 不可变模型：`ConfigDict(frozen=True)` 可使实例属性只读。
+- 模型嵌套与集合：子模型、列表、字典会递归校验。
+- 实用方法：`model_validate`/`model_validate_json` 从对象或 JSON 创建；`model_copy(update=...)` 基于现有实例复制并修改。
+
+使用示例（Pydantic v2）
+```python
+from pydantic import BaseModel, Field, ValidationError, field_validator, ConfigDict
+
+class Account(BaseModel):
+    model_config = ConfigDict(extra="forbid", populate_by_name=True)
+
+    id: int
+    name: str = "anonymous"
+    email: str = Field(..., alias="e_mail")
+    age: int | None = None
+
+    @field_validator("email")
+    @classmethod
+    def must_be_email(cls, v: str) -> str:
+        if "@" not in v:
+            raise ValueError("邮箱格式错误")
+        return v
+
+try:
+    acc = Account(id="1", e_mail="a@b.com", age="20")
+    print(acc.id, type(acc.id))             # 自动转成 int
+    print(acc.model_dump())                 # {'id': 1, 'name': 'anonymous', 'email': 'a@b.com', 'age': 20}
+    print(acc.model_dump(by_alias=True))    # {'id': 1, 'name': 'anonymous', 'e_mail': 'a@b.com', 'age': 20}
+except ValidationError as e:
+    print(e)                                # 结构化的错误信息
+```
+
+使用建议
+1. 在生产环境将 `extra` 设为 `forbid`，避免静默接受未声明字段。
+2. 通过 `Field` 提前声明长度、范围等约束，错误更早暴露。
+3. 使用校验器保持业务规则清晰明了，错误消息针对最终用户。
+4. 若需要只读对象或值对象模式，启用 `frozen=True`。
+
 ## 常用模式
 ### 字段约束与默认值
 ```python
