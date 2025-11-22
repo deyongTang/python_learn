@@ -80,6 +80,19 @@ except ValidationError as e:
 3. 使用校验器保持业务规则清晰明了，错误消息针对最终用户。
 4. 若需要只读对象或值对象模式，启用 `frozen=True`。
 
+## LangGraph + Pydantic 案例
+- 位置：`pydantic_lab/langgraph_pydantic_demo.py`
+- 运行：`python -m pydantic_lab.langgraph_pydantic_demo`
+- 依赖：`pip install langgraph>=0.2.30`（已写入 `requirements.txt`）
+
+案例说明
+- 用 `ChatState(BaseModel)` 定义 LangGraph 的状态结构与约束，`steps` 字段通过 `Annotated[..., operator.add]` 让节点返回的步骤列表自动累加。
+- `classify_intent` 节点根据输入文本标注意图；`craft_response` 节点根据意图生成回复，均返回部分状态更新。
+- `StateGraph(ChatState)` 会在节点边界执行 Pydantic 校验与类型转换（例如传入整数会被转为字符串）。
+- `app.invoke` 得到的原始字典可通过 `ChatState.model_validate(...)` 转为模型实例，便于 IDE 补全与后续逻辑。
+- 如使用 Python 3.9，示例已用 `typing.Optional`/`List` 兼容；若使用 3.10+ 可改回 `str | None` 与 `list[str]`。
+- `user_input` 字段增加了 `field_validator(mode="before")`，保证非字符串输入（如数字）被转换成字符串后再进入图。
+
 ## 常用模式
 ### 字段约束与默认值
 ```python
