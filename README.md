@@ -5,6 +5,7 @@
 - `sample.ipynb` 与 `seq.ipynb`：字典与序列的示例与练习，推荐通过 Jupyter Notebook 交互学习。
 - `pydantic_lab/`：使用 Pydantic 进行数据验证的示例（CLI、FastAPI、环境配置）。
 - `python -m pydantic_lab.langgraph_pydantic_demo`：LangGraph + Pydantic 状态机示例，展示类型校验与节点状态合并。
+- `python -m pydantic_lab.langgraph_rag_demo`：离线 RAG 流程示例，LangGraph 负责任务流转，Pydantic 校验查询与检索结果。
 - `docs/学习指南.md`：快速了解如何使用 Notebook 与 Pydantic 示例的中文技术文档。
 - `docs/LangGraph学习指南.md`：LangGraph 入门与练习项目指引（含最小模板与练习思路）。
 - `docs/Pydantic介绍.md`：Pydantic 的概念、常用模式与本仓库示例的中文入门介绍。

@@ -56,6 +56,11 @@ if __name__ == "__main__":
     print(result)
 ```
 
+## RAG 示范（纯本地）
+- 路径：`python -m pydantic_lab.langgraph_rag_demo`
+- 特点：使用内置小语料 + 关键词计数模拟检索，完全离线；Pydantic 负责状态与文档验证；节点返回增量字典。
+- 状态字段：`user_query`、`top_k`、`retrieved`、`answer`、`steps`（`Annotated[..., operator.add]` 用于累积）。
+
 ## 学习路径
 1) 跑通最小示例，理解“节点返回增量 + 状态合并”。
 2) 使用 `Field` 约束、`field_validator` 做输入清洗。
