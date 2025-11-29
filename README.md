@@ -11,6 +11,7 @@
 - `docs/Pydantic介绍.md`：Pydantic 的概念、常用模式与本仓库示例的中文入门介绍。
 - `requirements.txt`：安装依赖以运行示例与测试（包含 Jupyter）。
 - `python -m pydantic_lab.cli`：命令行校验 JSON 的示例，`-f` 与 `-j` 参数二选一；路径不存在会给出中文提示。
+- `projects/todo_manager/`：独立目录下的待办事项 CLI 示例，使用 Pydantic 校验和 JSON 存储，便于与其他脚本隔离。
 
 ## 快速开始
 
