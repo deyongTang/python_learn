@@ -1,0 +1,37 @@
+<svg xmlns='http://www.w3.org/2000/svg' width='720' height='480' viewBox='0 0 720 480'>
+  <title>Gradient Direction</title>
+  <rect x='0' y='0' width='100%' height='100%' fill='white'/>
+  <style>
+    .axis { stroke: #333; stroke-width: 1; }
+    .grid { stroke: #e0e0e0; stroke-width: 1; }
+    .label { font: 12px sans-serif; fill: #333; }
+    .pt { fill: #111; }
+  </style>
+  <defs>
+    <marker id='arrow-red' markerWidth='10' markerHeight='10' refX='9' refY='3' orient='auto'>
+      <path d='M0,0 L10,3 L0,6 Z' fill='#d62828'/>
+    </marker>
+    <marker id='arrow-green' markerWidth='10' markerHeight='10' refX='9' refY='3' orient='auto'>
+      <path d='M0,0 L10,3 L0,6 Z' fill='#2a9d8f'/>
+    </marker>
+  </defs>
+  <line class='grid' x1='50.0' y1='430.0' x2='50.0' y2='50.0'/>
+  <line class='grid' x1='50.0' y1='430.0' x2='670.0' y2='430.0'/>
+  <line class='grid' x1='205.0' y1='430.0' x2='205.0' y2='50.0'/>
+  <line class='grid' x1='50.0' y1='335.0' x2='670.0' y2='335.0'/>
+  <line class='grid' x1='360.0' y1='430.0' x2='360.0' y2='50.0'/>
+  <line class='grid' x1='50.0' y1='240.0' x2='670.0' y2='240.0'/>
+  <line class='grid' x1='515.0' y1='430.0' x2='515.0' y2='50.0'/>
+  <line class='grid' x1='50.0' y1='145.0' x2='670.0' y2='145.0'/>
+  <line class='grid' x1='670.0' y1='430.0' x2='670.0' y2='50.0'/>
+  <line class='grid' x1='50.0' y1='50.0' x2='670.0' y2='50.0'/>
+  <line class='axis' x1='50.0' y1='240.0' x2='670.0' y2='240.0'/>
+  <line class='axis' x1='360.0' y1='430.0' x2='360.0' y2='50.0'/>
+  <circle class='pt' cx='453.0' cy='154.5' r='4'/>
+  <text class='label' x='459.0' y='148.5'>x = (0.60, 0.90)</text>
+  <line x1='453.0' y1='154.5' x2='685.5' y2='155.9' stroke='#d62828' stroke-width='2.5' marker-end='url(#arrow-red)'/>
+  <text class='label' x='691.5' y='155.9'>grad (up)</text>
+  <line x1='453.0' y1='154.5' x2='220.5' y2='153.1' stroke='#2a9d8f' stroke-width='2.5' marker-end='url(#arrow-green)'/>
+  <text class='label' x='226.5' y='153.1'>-grad (down)</text>
+  <text class='label' x='50' y='464'>grad = (3.7378, -0.0362)</text>
+</svg>

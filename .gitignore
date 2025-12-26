@@ -1,0 +1,4 @@
+.idea/
+.ipynb_checkpoints/
+**/.ipynb_checkpoints/
+civil_code_rag/chroma_db/

@@ -1,0 +1,69 @@
+<svg xmlns='http://www.w3.org/2000/svg' width='720' height='280' viewBox='0 0 720 280'>
+  <title>Network</title>
+  <rect x='0' y='0' width='100%' height='100%' fill='white'/>
+  <style>
+    .node { fill: #f2f2f2; stroke: #333; stroke-width: 1.5; }
+    .line { stroke: #666; stroke-width: 1.2; }
+    .label { font: 12px sans-serif; fill: #333; }
+    .layer { font: 13px sans-serif; fill: #333; font-weight: bold; }
+    .weight { font: 12px sans-serif; fill: #1b6ca8; font-weight: bold; }
+  </style>
+
+  <text class='layer' x='70' y='30' text-anchor='middle'>x</text>
+  <text class='layer' x='230' y='30' text-anchor='middle'>z1</text>
+  <text class='layer' x='390' y='30' text-anchor='middle'>z2</text>
+  <text class='layer' x='550' y='30' text-anchor='middle'>y</text>
+
+  <!-- input layer -->
+  <circle class='node' cx='70' cy='90' r='18'/>
+  <circle class='node' cx='70' cy='170' r='18'/>
+  <text class='label' x='70' y='94' text-anchor='middle'>x1</text>
+  <text class='label' x='70' y='174' text-anchor='middle'>x2</text>
+
+  <!-- hidden layer 1 -->
+  <circle class='node' cx='230' cy='70' r='18'/>
+  <circle class='node' cx='230' cy='130' r='18'/>
+  <circle class='node' cx='230' cy='190' r='18'/>
+  <text class='label' x='230' y='74' text-anchor='middle'>h1</text>
+  <text class='label' x='230' y='134' text-anchor='middle'>h2</text>
+  <text class='label' x='230' y='194' text-anchor='middle'>h3</text>
+
+  <!-- hidden layer 2 -->
+  <circle class='node' cx='390' cy='100' r='18'/>
+  <circle class='node' cx='390' cy='170' r='18'/>
+  <text class='label' x='390' y='104' text-anchor='middle'>g1</text>
+  <text class='label' x='390' y='174' text-anchor='middle'>g2</text>
+
+  <!-- output layer -->
+  <circle class='node' cx='550' cy='110' r='18'/>
+  <circle class='node' cx='550' cy='170' r='18'/>
+  <text class='label' x='550' y='114' text-anchor='middle'>y1</text>
+  <text class='label' x='550' y='174' text-anchor='middle'>y2</text>
+
+  <!-- weight labels -->
+  <text class='weight' x='150' y='40' text-anchor='middle'>W1</text>
+  <text class='weight' x='310' y='40' text-anchor='middle'>W2</text>
+  <text class='weight' x='470' y='40' text-anchor='middle'>W3</text>
+
+  <!-- connections: input -> hidden1 -->
+  <line class='line' x1='88' y1='90' x2='212' y2='70'/>
+  <line class='line' x1='88' y1='90' x2='212' y2='130'/>
+  <line class='line' x1='88' y1='90' x2='212' y2='190'/>
+  <line class='line' x1='88' y1='170' x2='212' y2='70'/>
+  <line class='line' x1='88' y1='170' x2='212' y2='130'/>
+  <line class='line' x1='88' y1='170' x2='212' y2='190'/>
+
+  <!-- connections: hidden1 -> hidden2 -->
+  <line class='line' x1='248' y1='70' x2='372' y2='100'/>
+  <line class='line' x1='248' y1='70' x2='372' y2='170'/>
+  <line class='line' x1='248' y1='130' x2='372' y2='100'/>
+  <line class='line' x1='248' y1='130' x2='372' y2='170'/>
+  <line class='line' x1='248' y1='190' x2='372' y2='100'/>
+  <line class='line' x1='248' y1='190' x2='372' y2='170'/>
+
+  <!-- connections: hidden2 -> output -->
+  <line class='line' x1='408' y1='100' x2='532' y2='110'/>
+  <line class='line' x1='408' y1='100' x2='532' y2='170'/>
+  <line class='line' x1='408' y1='170' x2='532' y2='110'/>
+  <line class='line' x1='408' y1='170' x2='532' y2='170'/>
+</svg>
